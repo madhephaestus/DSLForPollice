@@ -32,7 +32,7 @@ ScriptingEngine.addScriptingLanguage(new IScriptingLanguage() {
 	 * @return
 	 */
 	public  String getShellType(){
-		return "Arduing Scripting Langauge"
+		return "ArduingScriptingLangauge"
 	}
 	/**
 	 * Returns the list of supported file extentions
@@ -51,8 +51,5 @@ ScriptingEngine.addScriptingLanguage(new IScriptingLanguage() {
 		return true;
 	}
 	
-}
-
-	
-	)
+})
 
