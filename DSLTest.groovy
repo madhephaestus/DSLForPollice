@@ -8,6 +8,7 @@ ScriptingEngine.addScriptingLanguage(new IScriptingLanguage {
 	 * @return the objects returned form the code that ran
 	 */
 	public  Object inlineScriptRun(File code, ArrayList<Object> args) throws Exception{
+		
 		return null;
 	}
 	
