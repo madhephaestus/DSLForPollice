@@ -10,40 +10,41 @@ ScriptingEngine.addScriptingLanguage(new IScriptingLanguage() {
 	 * @return the objects returned form the code that ran
 	 */
 	public  Object inlineScriptRun(File code, ArrayList<Object> args) throws Exception{
-		String content = new Scanner(code).useDelimiter("\\Z").next(); 
+		String content = new Scanner(code).useDelimiter("\\Z").next();
 		// Generate the INO file and directory structure
 		File parent = code.getParentFile();
-		String codeBase = code.getName().split("."+getFileExtenetion().get(0))[0];
-		File inoDir = new File(parent.getAbsolutePath()+"/"+codeBase);
-		if(!inoDir.exists()){
+		String codeBase = code.getName().split("." + getFileExtenetion().get(0))[0];
+		File inoDir = new File(parent.getAbsolutePath() + "/" + codeBase);
+		if (!inoDir.exists()) {
 			inoDir.mkdir();
 		}
-		File ino = new File(parent.getAbsolutePath()+"/"+codeBase+"/"+codeBase+".ino");
-		if( !ino.exists()){
+		File ino = new File(parent.getAbsolutePath() + "/" + codeBase + "/" + codeBase + ".ino");
+		if (!ino.exists()) {
 			ino.createNewFile();
 		}
-		
-		String text = "void setup(){\n"+
-				"\tSerial.begin(115200);\n"+
-				"}\n"+
-				 "void loop(){\n"+
-				"\tSerial.println(\""+content+"\");\n"+
-				"}";
+
+		String text = "void setup(){\n" + 
+		"\tSerial.begin(9600);\n" +
+		"}\n" + 
+		"void loop(){\n" + 
+		"\tSerial.println(\""+ content +"\");\n" + 
+		"}";
 		BufferedWriter output = null;
 		try {
-		  output = new BufferedWriter(new FileWriter(ino));
-		  output.write(text);
-		} catch ( IOException e ) {
-		  e.printStackTrace();
+			output = new BufferedWriter(new FileWriter(ino));
+			output.write(text);
+		} catch (IOException e) {
+			e.printStackTrace();
 		} finally {
-		if ( output != null ) {
-		  output.close();
+			if (output != null) {
+				output.close();
+			}
 		}
-		}
-		System.out.println("Pushing INO to arduino compile "+ino.getAbsolutePath());
-		
+
+		System.out.println("Pushing INO to arduino compile " + ino.getAbsolutePath());
+
 		ScriptingEngine.inlineFileScriptRun(ino, args);
-		
+
 		return null;
 	}
 	
