@@ -1,6 +1,8 @@
+import com.neuronrobotics.bowlerstudio.scripting.*
+
 println "Loading new DSL..."
 
-ScriptingEngine.addScriptingLanguage(new IScriptingLanguage {
+ScriptingEngine.addScriptingLanguage(new IScriptingLanguage() {
 	/**
 	 * This interface is for adding additional language support. 
 	 * @param code file content of the code to be executed
@@ -20,6 +22,7 @@ ScriptingEngine.addScriptingLanguage(new IScriptingLanguage {
 	 * @throws Exception 
 	 */
 	public  Object inlineScriptRun(String code, ArrayList<Object> args) throws Exception{
+		
 		return null;
 	}
 	
@@ -37,7 +40,7 @@ ScriptingEngine.addScriptingLanguage(new IScriptingLanguage {
 	 * @return true if the file extension is supported, false otherwise.
 	 */
 	public  boolean isSupportedFileExtenetion(String filename){
-		if(	filename.toLowerCase().endsWith(".asl")||
+		if(	filename.toLowerCase().endsWith(".asl")
 				)
 			return true;
 		return false;
