@@ -41,7 +41,7 @@ ScriptingEngine.addScriptingLanguage(new IScriptingLanguage() {
 			}
 		}
 
-		System.out.println("Pushing INO to arduino compile " + ino.getAbsolutePath());
+		System.out.println("Pushing INO to arduino compile  and flash device: " + ino.getAbsolutePath());
 
 		ScriptingEngine.inlineFileScriptRun(ino, args);
 
