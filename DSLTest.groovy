@@ -23,8 +23,13 @@ ScriptingEngine.addScriptingLanguage(new IScriptingLanguage() {
 			ino.createNewFile();
 		}
 
-		String text = "void setup(){\n" + "\tSerial.begin(9600);\n" + "}\n" + "void loop(){\n" + "\tSerial.println("
-				+ content + ");\n" + "}";
+		String text = "void setup(){\n" + 
+		"\tSerial.begin(9600);\n" +
+		"}\n" + 
+		"void loop(){\n" + 
+		"\tSerial.println("+ content +
+		");\n" + 
+		"}";
 		BufferedWriter output = null;
 		try {
 			output = new BufferedWriter(new FileWriter(ino));
