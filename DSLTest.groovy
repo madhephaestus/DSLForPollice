@@ -23,28 +23,28 @@ ScriptingEngine.addScriptingLanguage(new IScriptingLanguage() {
 			ino.createNewFile();
 		}
 		
-        String text = "void setup(){\n"+
-        		"\tSerial.begin(115200);\n"+
-        		"}\n"+
-        		 "void loop(){\n"+
-        		"\tSerial.println(\""+content+"\");\n"+
-        		"}";
-        BufferedWriter output = null;
-        try {
-            output = new BufferedWriter(new FileWriter(ino));
-            output.write(text);
-        } catch ( IOException e ) {
-            e.printStackTrace();
-        } finally {
-          if ( output != null ) {
-            output.close();
-          }
-        }
-	   System.out.println("Pushing INO to arduino compile "+ino.getAbsolutePath());
+		String text = "void setup(){\n"+
+				"\tSerial.begin(115200);\n"+
+				"}\n"+
+				 "void loop(){\n"+
+				"\tSerial.println(\""+content+"\");\n"+
+				"}";
+		BufferedWriter output = null;
+		try {
+		  output = new BufferedWriter(new FileWriter(ino));
+		  output.write(text);
+		} catch ( IOException e ) {
+		  e.printStackTrace();
+		} finally {
+		if ( output != null ) {
+		  output.close();
+		}
+		}
+		System.out.println("Pushing INO to arduino compile "+ino.getAbsolutePath());
 		
-	   ScriptingEngine.inlineFileScriptRun(ino, args);
+		ScriptingEngine.inlineFileScriptRun(ino, args);
 		
-	   return null;
+		return null;
 	}
 	
 	/**
