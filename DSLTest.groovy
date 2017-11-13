@@ -35,17 +35,14 @@ ScriptingEngine.addScriptingLanguage(new IScriptingLanguage() {
 		return "Arduing Scripting Langauge"
 	}
 	/**
-	 * This function should return true is the filename provided is of a supported file extension. 
-	 * This function may never be called if this language is only used internally. 
-	 * @param filename the filename of the file to be executed
-	 * @return true if the file extension is supported, false otherwise.
+	 * Returns the list of supported file extentions
+	 * Convention is to provide just the leters that make up the file extention
+	 * @return
 	 */
-	public  boolean isSupportedFileExtenetion(String filename){
-		if(	filename.toLowerCase().endsWith(".asl")
-				)
-			return true;
-		return false;
+	public  ArrayList<String> getFileExtenetion(){
+		return ["asl"]
 	}
+	
 	/**
 	 * This function returns if this is a binary file or a text file
 	 * @return true if the file is a text file.
