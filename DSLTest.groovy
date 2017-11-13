@@ -10,8 +10,8 @@ ScriptingEngine.addScriptingLanguage(new IScriptingLanguage() {
 	 * @return the objects returned form the code that ran
 	 */
 	public  Object inlineScriptRun(File code, ArrayList<Object> args) throws Exception{
-		
-		return null;
+		String content = new Scanner(new File(code.getAbsolutePath())).useDelimiter("\\Z").next(); 
+		return inlineScriptRun(content,args);
 	}
 	
 	/**
@@ -22,7 +22,7 @@ ScriptingEngine.addScriptingLanguage(new IScriptingLanguage() {
 	 * @throws Exception 
 	 */
 	public  Object inlineScriptRun(String code, ArrayList<Object> args) throws Exception{
-		
+		println "Compiling code..."+code
 		return null;
 	}
 	
@@ -57,3 +57,4 @@ ScriptingEngine.addScriptingLanguage(new IScriptingLanguage() {
 
 	
 	)
+
