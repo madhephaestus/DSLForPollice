@@ -10,9 +10,41 @@ ScriptingEngine.addScriptingLanguage(new IScriptingLanguage() {
 	 * @return the objects returned form the code that ran
 	 */
 	public  Object inlineScriptRun(File code, ArrayList<Object> args) throws Exception{
-		String content = new Scanner(new File(code.getAbsolutePath())).useDelimiter("\\Z").next(); 
+		String content = new Scanner(code).useDelimiter("\\Z").next(); 
 		// Generate the INO file and directory structure
-		return inlineScriptRun(content,args);
+		File parent = code.getParentFile();
+		String codeBase = code.getName().split(getFileExtenetion().get(0))[0];
+		File inoDir = new File(parent.getAbsolutePath()+"/"+codeBase);
+		if(!inoDir.exists()){
+			inoDir.mkdir();
+		}
+		File ino = new File(parent.getAbsolutePath()+"/"+codeBase+"/"+codeBase+".ino");
+		if( !ino.exists()){
+			ino.createNewFile();
+		}
+		
+        String text = "void setup(){\n"+
+        		"\tSerial.begin(9600);\n"+
+        		"}\n"+
+        		 "void loop(){\n"+
+        		"\tSerial.println("+content+");\n"+
+        		"}";
+        BufferedWriter output = null;
+        try {
+            output = new BufferedWriter(new FileWriter(ino));
+            output.write(text);
+        } catch ( IOException e ) {
+            e.printStackTrace();
+        } finally {
+          if ( output != null ) {
+            output.close();
+          }
+        }
+	   System.out.println("Pushing INO to arduino compile");
+		
+	   ScriptingEngine.inlineFileScriptRun(ino, args);
+		
+	   return null;
 	}
 	
 	/**
@@ -23,12 +55,12 @@ ScriptingEngine.addScriptingLanguage(new IScriptingLanguage() {
 	 * @throws Exception 
 	 */
 	public  Object inlineScriptRun(String code, ArrayList<Object> args) throws Exception{
-		println "Compiling code..."+code
+		println "code..."+code
 		return null;
 	}
 	
 	/**
-	 * Returns the shell type of this language
+	 * Returns the HashMap key for this language
 	 * @return
 	 */
 	public  String getShellType(){
