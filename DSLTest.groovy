@@ -13,7 +13,7 @@ ScriptingEngine.addScriptingLanguage(new IScriptingLanguage() {
 		String content = new Scanner(code).useDelimiter("\\Z").next(); 
 		// Generate the INO file and directory structure
 		File parent = code.getParentFile();
-		String codeBase = code.getName().split(getFileExtenetion().get(0))[0];
+		String codeBase = code.getName().split("."+getFileExtenetion().get(0))[0];
 		File inoDir = new File(parent.getAbsolutePath()+"/"+codeBase);
 		if(!inoDir.exists()){
 			inoDir.mkdir();
@@ -24,10 +24,10 @@ ScriptingEngine.addScriptingLanguage(new IScriptingLanguage() {
 		}
 		
         String text = "void setup(){\n"+
-        		"\tSerial.begin(9600);\n"+
+        		"\tSerial.begin(115200);\n"+
         		"}\n"+
         		 "void loop(){\n"+
-        		"\tSerial.println("+content+");\n"+
+        		"\tSerial.println(\""+content+"\");\n"+
         		"}";
         BufferedWriter output = null;
         try {
@@ -40,7 +40,7 @@ ScriptingEngine.addScriptingLanguage(new IScriptingLanguage() {
             output.close();
           }
         }
-	   System.out.println("Pushing INO to arduino compile");
+	   System.out.println("Pushing INO to arduino compile "+ino.getAbsolutePath());
 		
 	   ScriptingEngine.inlineFileScriptRun(ino, args);
 		
