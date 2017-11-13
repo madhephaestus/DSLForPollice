@@ -11,6 +11,7 @@ ScriptingEngine.addScriptingLanguage(new IScriptingLanguage() {
 	 */
 	public  Object inlineScriptRun(File code, ArrayList<Object> args) throws Exception{
 		String content = new Scanner(new File(code.getAbsolutePath())).useDelimiter("\\Z").next(); 
+		// Generate the INO file and directory structure
 		return inlineScriptRun(content,args);
 	}
 	
