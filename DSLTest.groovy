@@ -22,12 +22,12 @@ ScriptingEngine.addScriptingLanguage(new IScriptingLanguage() {
 		if (!ino.exists()) {
 			ino.createNewFile();
 		}
-
+		//With the valid ion and parent directory created, generate code
 		String text = "void setup(){\n" + 
 		"\tSerial.begin(9600);\n" +
 		"}\n" + 
 		"void loop(){\n" + 
-		"\tSerial.println(\""+ content +"\");\n" + 
+		"\tSerial.println(\""+ content +"\");\n" + // print the contents of the code file in the arduino loop
 		"}";
 		BufferedWriter output = null;
 		try {
