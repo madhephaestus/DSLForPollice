@@ -10,7 +10,6 @@ ScriptingEngine.addScriptingLanguage(new IScriptingLanguage() {
 	 * @return the objects returned form the code that ran
 	 */
 	public  Object inlineScriptRun(File code, ArrayList<Object> args) throws Exception{
-		String content = new Scanner(code).useDelimiter("\\Z").next();
 		// Generate the INO file and directory structure
 		File parent = code.getParentFile();
 		String codeBase = code.getName().split("." + getFileExtenetion().get(0))[0];
@@ -26,9 +25,12 @@ ScriptingEngine.addScriptingLanguage(new IScriptingLanguage() {
 		String text = "void setup(){\n" + 
 		"\tSerial.begin(9600);\n" +
 		"}\n" + 
-		"void loop(){\n" + 
-		"\tSerial.println(\""+ content +"\");\n" + // print the contents of the code file in the arduino loop
-		"}";
+		"void loop(){\n" 
+		def lines = code.readLines().each{
+		 text+="\tSerial.println(\""+ it +"\");\n"  // print the contents of the code file in the arduino loop
+		}
+		text+="}";
+		
 		BufferedWriter output = null;
 		try {
 			output = new BufferedWriter(new FileWriter(ino));
