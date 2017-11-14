@@ -26,7 +26,7 @@ ScriptingEngine.addScriptingLanguage(new IScriptingLanguage() {
 		"\tSerial.begin(9600);\n" +
 		"}\n" + 
 		"void loop(){\n" 
-		def lines = code.readLines().each{
+		code.readLines().each{
 		 text+="\tSerial.println(\""+ it +"\");\n"  // print the contents of the code file in the arduino loop
 		}
 		text+="}";
