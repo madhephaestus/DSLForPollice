@@ -4,12 +4,13 @@ Integer baudRate = 9600;
 // Look for the serial port holding device in the DeviceManager
 // if it is missing, call this lambda to create it
 def dev = DeviceManager.getSpecificDevice( "aslSerialPort",{
-	//If the device does not exist, prompt for the connection
+	//Load the compiler
 	ScriptingEngine.gitScriptRun(
 	       "https://github.com/madhephaestus/DSLForPollice.git", // git location of the library
             "DSLTest.groovy" , // file to load
             null// no parameters 
             );
+     // program the arduino and receive the serial port object
 	NRSerialPort serial = (NRSerialPort) ScriptingEngine.gitScriptRun(
 	            "https://github.com/madhephaestus/DSLForPollice.git", // git location of the library
 	            "TestLang.asl" , // file to load
