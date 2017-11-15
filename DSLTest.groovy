@@ -52,10 +52,11 @@ ScriptingEngine.addScriptingLanguage(new IScriptingLanguage() {
 
 		System.out.println("Pushing INO to arduino compile  and flash device: " + ino.getAbsolutePath());
 
-		ScriptingEngine.inlineFileScriptRun(ino, args);
+		ScriptingEngine.inlineFileScriptRun(ino, null);
 		if(args!=null){
 			//https://github.com/NeuronRobotics/nrjavaserial#how-to-use-nrserialport-objects
-			return new gnu.io.NRSerialPort(port, baudRate);// return a serial port connection to the device
+			def ser = new gnu.io.NRSerialPort(port, baudRate);// return a serial port connection to the device
+			return ser;// return a serial port connection to the device
 		}
 		return null;
 	}
