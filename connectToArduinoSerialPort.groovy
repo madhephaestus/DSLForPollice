@@ -20,8 +20,8 @@ def dev = DeviceManager.getSpecificDevice( "aslSerialPort",{
      //o device can stay persistant and be communicated with. 
 	NonBowlerDevice d = new NonBowlerDevice(){
 		public NRSerialPort mySerial = serial;
-		public DataInputStream ins = new DataInputStream(serial.getInputStream());
-		public DataOutputStream outs = new DataOutputStream(serial.getOutputStream());
+		public DataInputStream ins = null
+		public DataOutputStream outs = null
 		/**
 		 * This method tells the connection object to disconnect its pipes and close out the connection. Once this is called, it is safe to remove your device.
 		 */
@@ -36,7 +36,10 @@ def dev = DeviceManager.getSpecificDevice( "aslSerialPort",{
 		 * @return true, if successful
 		 */
 		public  boolean connectDeviceImp(){
-			return serial.connect()
+			 serial.connect()
+			 ins = new DataInputStream(serial.getInputStream());
+			 outs = new DataOutputStream(serial.getOutputStream());
+			 return true
 		}
 		
 		/**
@@ -54,6 +57,10 @@ def dev = DeviceManager.getSpecificDevice( "aslSerialPort",{
 
 
 //Read a byte from the arduino
-byte b = dev.ins.read();
+char b
+for(int i=0;i<1000;i++){
+	b = dev.ins.read();
+	print b
+}
 //Write a byte to the arduino
-dev.outs.write(b);
+dev.outs.write((byte)b);
