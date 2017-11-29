@@ -1,4 +1,6 @@
 import com.neuronrobotics.bowlerstudio.scripting.*
+import org.fife.ui.rsyntaxtextarea.SyntaxConstants;
+import com.neuronrobotics.bowlerstudio.tabs.LocalFileScriptTab;
 
 println "Loading new DSL..."
 
@@ -114,4 +116,6 @@ ScriptingEngine.addScriptingLanguage(new IScriptingLanguage() {
 	}
 	
 })
-
+//Set the file associate for syntax highlighting in the text editor
+// for options see: https://github.com/bobbylight/RSyntaxTextArea/blob/master/src/main/java/org/fife/ui/rsyntaxtextarea/SyntaxConstants.java
+LocalFileScriptTab.setExtentionSyntaxType(SyntaxConstants.SYNTAX_STYLE_LISP)
